@@ -1,4 +1,4 @@
-package com.academicproject.memberservice.dto;
+package com.academicproject.memberservice.dto.request;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -11,13 +11,13 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class StudentDTO {
+public class CreateStudentRequest {
 
     @NotNull
-    private String firstName;
+    private String fullName;
 
     @NotNull
-    private String lastName;
+    private String gender;
 
     @NotNull
     private LocalDate birthDate;
