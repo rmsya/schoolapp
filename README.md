@@ -22,3 +22,89 @@ Run service
 
 
 ## How to test
+
+## Create Student
+
+Endpoint
+```
+POST http://localhost:8081/api/v1/student/create
+```
+
+Header
+```
+Content-Type: application/json
+```
+
+RequestBody
+```
+{
+    "fullName":"Rahma Isnaini M",
+    "gender": "Female",
+    "grade": "2",
+    "birthDate" : "1994-12-12",
+    "parentName" : "Masnadi",
+    "parentPhone" : "08129646374"
+}
+```
+
+## Get Student List
+
+Endpoint
+```
+POST http://localhost:8081/api/v1/student/get-list
+```
+
+Header
+```
+Content-Type: application/json
+```
+
+RequestBody
+```
+{
+    "fullName" : "Rahma"
+}
+```
+
+## Get Student Detail
+
+Endpoint
+```
+GET http://localhost:8081/api/v1/student/get-detail?studentId=ST_XXXX
+```
+
+## Get Student Billing
+
+Endpoint
+```
+GET http://localhost:8081/api/v1/student-fee/get-billing?studentId=ST_1741800519933&billingType=MONTHLY
+```
+
+
+## Student Fee Payment
+
+Endpoint
+```
+POST http://localhost:8081/api/v1/student-fee/pay
+```
+
+Header
+```
+Content-Type: application/json
+```
+
+RequestBody
+```
+{
+    "studentId" : "ST_XXXXX",
+    "year" : "2025",
+    "month" : "8",
+    "type" : "MONTHLY",
+    "paymentMethod" : "BANK_TRANSFER",
+    "amount" : "100000"
+}
+```
+
+
+
+
