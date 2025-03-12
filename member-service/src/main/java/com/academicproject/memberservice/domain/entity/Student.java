@@ -23,8 +23,12 @@ public class Student extends BaseEntity {
 
     private String gender;
 
+    private String grade;
+
     private String parentName;
 
     private String parentPhone;
+
+    private String status;
 
 }

@@ -1,6 +1,5 @@
 package com.academicproject.memberservice.controller;
 
-import com.academicproject.memberservice.domain.entity.Student;
 import com.academicproject.memberservice.dto.StudentDTO;
 import com.academicproject.memberservice.dto.request.CreateStudentRequest;
 import com.academicproject.memberservice.service.StudentService;
@@ -25,14 +24,21 @@ public class StudentController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping
+    @GetMapping("/get-list")
     public ResponseEntity<Page<StudentDTO>> getStudents(
             @RequestParam(required = false) String studentId,
-            @RequestParam(required = false) String firstName,
+            @RequestParam(required = false) String fullName,
             @RequestParam(required = false) String gender,
-            @PageableDefault(size = 10, sort = "id") Pageable pageable) {
+            @PageableDefault(size = 10, sort = "fullName") Pageable pageable) {
 
-        Page<StudentDTO> students = studentService.getStudents(studentId, firstName, gender, pageable);
+        Page<StudentDTO> students = studentService.getStudents(studentId, fullName, gender, pageable);
         return ResponseEntity.ok(students);
+    }
+
+    @GetMapping("/get-detail")
+    public ResponseEntity<StudentDTO> getStudentDetail(
+            @RequestParam String studentId) {
+        StudentDTO student = studentService.getStudentDetail(studentId);
+        return ResponseEntity.ok(student);
     }
 }

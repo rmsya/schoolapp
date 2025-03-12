@@ -1,4 +1,4 @@
-package com.academicproject.memberservice.dto.request;
+package com.academicproject.paymentservice.dto;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -11,24 +11,17 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateStudentRequest {
+public class StudentDTO {
 
-    @NotNull
     private String fullName;
 
-    @NotNull
     private String gender;
 
-    @NotNull
     private LocalDate birthDate;
 
-    @NotNull
     private String grade;
 
-    @NotNull
     private String parentName;
 
-    @NotNull
-    @Pattern(regexp = "^[08]{2}[0-9]{9}$")
     private String parentPhone;
 }

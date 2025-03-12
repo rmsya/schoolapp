@@ -14,10 +14,13 @@ import java.time.LocalDate;
 public class StudentDTO {
 
     @NotNull
-    private String firstName;
+    private String fullName;
 
     @NotNull
-    private String lastName;
+    private String gender;
+
+    @NotNull
+    private String grade;
 
     @NotNull
     private LocalDate birthDate;
@@ -28,4 +31,7 @@ public class StudentDTO {
     @NotNull
     @Pattern(regexp = "^[08]{2}[0-9]{9}$")
     private String parentPhone;
+
+    @NotNull
+    private String status;
 }

@@ -11,4 +11,6 @@ public interface StudentService {
 
     Page<StudentDTO> getStudents(String studentId, String fullName, String gender, Pageable pageable);
 
+    StudentDTO getStudentDetail(String studentId);
+
 }
