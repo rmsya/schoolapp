@@ -24,7 +24,7 @@ public class StudentFeeController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping
+    @GetMapping("/get-billing")
     public ResponseEntity<GetStudentBillingResponse> getBilling(
             @RequestParam String studentId,
             @RequestParam String billingType) {

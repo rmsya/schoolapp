@@ -13,22 +13,25 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class CreateStudentRequest {
 
-    @NotNull
+    @NotNull (message = "student name is mandatory")
     private String fullName;
 
-    @NotNull
+    @NotNull (message = "gender is mandatory")
+    @Pattern(regexp = "Male|Female", message = "gender must be 'Male' or 'Female'")
     private String gender;
 
-    @NotNull
+    @NotNull (message = "birthdate is mandatory")
     private LocalDate birthDate;
 
-    @NotNull
+    @NotNull (message = "grade is mandatory")
+    @Pattern(regexp = "^(1[0-2]|[1-9])$", message = "grade must be between 1 and 12")
     private String grade;
 
-    @NotNull
+    @NotNull (message = "parent name is mandatory")
     private String parentName;
 
-    @NotNull
+    @NotNull (message = "parent phone is mandatory")
     @Pattern(regexp = "^[08]{2}[0-9]{9}$")
     private String parentPhone;
+
 }

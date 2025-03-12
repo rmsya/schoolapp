@@ -19,7 +19,7 @@ public class MonthlyPaymentStrategy implements PaymentStrategy {
     public void processPayment(PaymentRequest paymentRequest) {
 
         StMonthlyFeeOrder stMonthlyFeeOrder = StMonthlyFeeOrderMapper.INSTANCE.toEntity(paymentRequest);
-        stMonthlyFeeOrder.setTransactionId(CommonHelper.generateId("TRX-"));
+        stMonthlyFeeOrder.setTransactionId(CommonHelper.generateId("TRX"));
         stMonthlyFeeOrderRepository.save(stMonthlyFeeOrder);
     }
 }

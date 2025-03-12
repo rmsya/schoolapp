@@ -1,6 +1,9 @@
 package com.academicproject.memberservice.service.impl;
 
 import com.academicproject.memberservice.domain.entity.Student;
+import com.academicproject.memberservice.domain.enums.PaymentMethod;
+import com.academicproject.memberservice.domain.enums.StudentPaymentType;
+import com.academicproject.memberservice.domain.enums.StudentStatus;
 import com.academicproject.memberservice.dto.StudentDTO;
 import com.academicproject.memberservice.dto.request.CreateStudentRequest;
 import com.academicproject.memberservice.dto.request.PaymentRequest;
@@ -30,9 +33,9 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public void createStudent(CreateStudentRequest request) {
-
         Student student = StudentMapper.INSTANCE.createRequestToEntity(request);
         student.setStudentId(CommonHelper.generateId("ST"));
+        student.setStatus(StudentStatus.PENDING.name());
 
         studentRepository.save(student);
         paymentServiceClient.pay(buildPaymentRequest(student.getStudentId()));
@@ -54,10 +57,12 @@ public class StudentServiceImpl implements StudentService {
     private PaymentRequest buildPaymentRequest(String studentId) {
         PaymentRequest paymentRequest = new PaymentRequest();
         paymentRequest.setStudentId(studentId);
-        paymentRequest.setType("MONTHLY");
-        paymentRequest.setPaymentMethod("CASH");
+        paymentRequest.setType(StudentPaymentType.MONTHLY.name());
+        paymentRequest.setPaymentMethod(PaymentMethod.BANK_TRANSFER.name());
         paymentRequest.setYear(String.valueOf(LocalDate.now().getYear()));
         paymentRequest.setMonth(String.valueOf(LocalDate.now().getMonthValue()));
+
+        //amount for first month only
         paymentRequest.setAmount(new BigDecimal(1000000));
 
         return paymentRequest;

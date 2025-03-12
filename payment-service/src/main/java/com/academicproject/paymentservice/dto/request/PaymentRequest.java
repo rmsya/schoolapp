@@ -12,21 +12,21 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class PaymentRequest {
 
-    @NotNull
+    @NotNull (message = "student id is mandatory")
     private String studentId;
 
-    @NotNull
+    @NotNull (message = "year is mandatory")
     private String year;
 
     private String month;
 
-    @NotNull
+    @NotNull (message = "payment type is mandatory")
     private String type;
 
-    @NotNull
+    @NotNull (message = "payment method is mandatory")
     private String paymentMethod;
 
-    @NotNull
+    @NotNull (message = "amount is mandatory")
     private BigDecimal amount;
 
 }

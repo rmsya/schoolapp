@@ -1,12 +1,12 @@
 package com.academicproject.paymentservice.service.impl;
 
 import com.academicproject.paymentservice.domain.entity.StMonthlyFeeOrder;
+import com.academicproject.paymentservice.domain.enums.PaymentType;
 import com.academicproject.paymentservice.dto.BillingDTO;
 import com.academicproject.paymentservice.dto.StudentDTO;
 import com.academicproject.paymentservice.dto.request.PaymentRequest;
 import com.academicproject.paymentservice.factory.PaymentStrategyFactory;
 import com.academicproject.paymentservice.feign.MemberServiceClient;
-import com.academicproject.paymentservice.mapper.StMonthlyFeeOrderMapper;
 import com.academicproject.paymentservice.repository.StMonthlyFeeOrderRepository;
 import com.academicproject.paymentservice.repository.StudentFeeRepository;
 import com.academicproject.paymentservice.service.StudentFeeService;
@@ -47,10 +47,16 @@ public class StudentFeeServiceImpl implements StudentFeeService {
     @Override
     public BillingDTO getBilling(String studentId, String billingType) {
         BillingDTO billingDTO = new BillingDTO();
-        if (StringUtils.equals(billingType, "MONTHLY")) {
-            billingDTO = fillNewBillingInformation(stMonthlyFeeOrderRepository.findTopByStudentIdOrderByTransactionIdDesc(studentId));
-        } else if (StringUtils.equals(billingType, "ANNUAL")) {
+        if (StringUtils.equals(billingType, PaymentType.MONTHLY.name())) {
+            StMonthlyFeeOrder stMonthlyFeeOrder = stMonthlyFeeOrderRepository.findTopByStudentIdOrderByTransactionIdDesc(studentId);
 
+            if (stMonthlyFeeOrder == null) {
+                return billingDTO;
+            }
+            billingDTO = fillNewBillingInformation(stMonthlyFeeOrder);
+
+        } else if (StringUtils.equals(billingType, PaymentType.ANNUALLY.name()) || StringUtils.equals(billingType, PaymentType.SEMESTER.name())) {
+            System.out.print("not supported yet");
         } else {
             throw new IllegalArgumentException("Invalid type: " + billingType);
         }
