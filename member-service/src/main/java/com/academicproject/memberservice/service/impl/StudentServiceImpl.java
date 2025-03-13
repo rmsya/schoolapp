@@ -32,14 +32,14 @@ public class StudentServiceImpl implements StudentService {
     private PaymentServiceClient paymentServiceClient;
 
     @Override
-    public void createStudent(CreateStudentRequest request) {
+    public StudentDTO createStudent(CreateStudentRequest request) {
         Student student = StudentMapper.INSTANCE.createRequestToEntity(request);
         student.setStudentId(CommonHelper.generateId("ST"));
         student.setStatus(StudentStatus.PENDING.name());
 
         studentRepository.save(student);
         paymentServiceClient.pay(buildPaymentRequest(student.getStudentId()));
-
+        return StudentMapper.INSTANCE.toDTO(student);
     }
 
     @Override

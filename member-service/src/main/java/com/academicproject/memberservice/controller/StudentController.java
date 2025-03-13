@@ -19,9 +19,9 @@ public class StudentController {
     private StudentService studentService;
 
     @PostMapping("/create")
-    public ResponseEntity<Void> createStudent(@Valid @RequestBody CreateStudentRequest request) {
-        studentService.createStudent(request);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<StudentDTO> createStudent(@Valid @RequestBody CreateStudentRequest request) {
+        StudentDTO studentDTO = studentService.createStudent(request);
+        return ResponseEntity.ok(studentDTO);
     }
 
     @GetMapping("/get-list")

@@ -31,7 +31,7 @@ public class CreateStudentRequest {
     private String parentName;
 
     @NotNull (message = "parent phone is mandatory")
-    @Pattern(regexp = "^[08]{2}[0-9]{9}$")
+    @Pattern(regexp = "^[08]{2}[0-9]{10}$")
     private String parentPhone;
 
 }
